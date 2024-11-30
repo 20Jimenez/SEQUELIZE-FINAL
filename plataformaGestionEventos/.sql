@@ -1,0 +1,33 @@
+-- Creacion de la base de datos
+CREATE DATABASE eventos;
+USE eventos;
+
+CREATE TABLE usuario (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) ,
+    email VARCHAR(255) ,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE evento (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) ,
+    descripcion TEXT,
+    fecha DATETIME,
+    ubicacion VARCHAR(255),
+    capacidad INT ,
+    inscripciones INT ,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE inscripcion (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuarioId INT ,
+    eventoId INT ,
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuarioId) REFERENCES usuario(id),
+    FOREIGN KEY (eventoId) REFERENCES evento(id) 
+);
